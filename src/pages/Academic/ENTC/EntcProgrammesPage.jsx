@@ -1,41 +1,25 @@
-// EntcProgrammesPage.jsx
+// src/pages/Academic/Entc/EntcProgrammesPage.jsx
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
-// Data for the UG/PG Course table, extracted from the ENTC profile HTML
-const entcCourses = [
-  { srNo: '1', name: 'B.Tech. (Electronics and Telecommunication Engineering)', startYear: '1988', duration: '04', type: 'Full Time', intake: '60' },
-  { srNo: '2', name: 'M.Tech. (Electronics and Telecommunication Engineering)', startYear: '1988', duration: '02', type: 'Full Time', intake: '18' },
-];
-
-// Define the sub-navigation tabs for the ENTC department
-const entcDepartmentTabs = [
-  { name: "DEPT Profile", path: "/academics/electronincs-telecommunication-engineering" },
-  { name: "Vision-Mission", path: "/academics/electronincs-telecommunication-engineering/vision-mission" },
-  { name: "Programmes", path: "/academics/electronincs-telecommunication-engineering/programmes" },
-  { name: "Faculty Profile", path: "/academics/electronincs-telecommunication-engineering/faculty" },
-  { name: "Laboratory", path: "/academics/electronincs-telecommunication-engineering/labs" },
-  { name: "Training and Placement", path: "/academics/electronincs-telecommunication-engineering/training-placement" },
-  { name: "Research & Publication", path: "/academics/electronincs-telecommunication-engineering/research-publication" },
-  { name: "Achievements", path: "/academics/electronincs-telecommunication-engineering/achievements" },
-  { name: "Departmental Activity", path: "/academics/electronincs-telecommunication-engineering/activities" },
-  { name: "ETA", path: "/academics/electronincs-telecommunication-engineering/eta" },
-  { name: "Downloads", path: "/academics/electronincs-telecommunication-engineering/downloads" },
-  { name: "Consultancy", path: "/academics/electronincs-telecommunication-engineering/consultancy" },
-];
+import {
+  entcDepartmentTabs,
+  entcProgrammesCourses,
+  entcProgrammesCommitteeLinks,
+  entcCourseOutcomesLinks,
+} from './entcConstants'; // Import data from constants
 
 const EntcProgrammesPage = () => {
   const location = useLocation();
 
   // Reusable table rendering function for generic table structure
-  const renderTable = (headers, data, keyPrefix, isNested = false) => (
-    <div className={`overflow-x-auto relative shadow-md rounded-lg my-6 ${isNested ? 'border border-gray-200' : 'border border-gray-300'}`}>
+  const renderTable = (headers, data, keyPrefix) => (
+    <div className="overflow-x-auto relative shadow-md rounded-lg my-6 border border-gray-300">
       <table className="w-full text-sm text-left text-gray-700">
-        <thead className={`text-xs text-white uppercase ${isNested ? 'bg-indigo-600' : 'bg-indigo-700'}`}>
+        <thead className="text-xs text-white uppercase bg-indigo-700">
           <tr>
             {headers.map((header, index) => (
               <th key={index} scope="col" className={`py-3 px-4 md:px-6 ${index === 0 ? 'rounded-tl-lg' : ''} ${index === headers.length - 1 ? 'rounded-tr-lg' : ''} whitespace-nowrap`}>
-                {header.includes('<br>') ? <span dangerouslySetInnerHTML={{ __html: header }} /> : header}
+                {header}
               </th>
             ))}
           </tr>
@@ -67,6 +51,7 @@ const EntcProgrammesPage = () => {
         <h1 className="text-4xl md:text-5xl font-bold mb-4 relative z-10">Electronics & Telecommunication Engineering Programmes</h1>
         <p className="text-xl opacity-90 max-w-2xl relative z-10">
           A comprehensive list of undergraduate and postgraduate courses.
+          {/* IMPORTANT: The data displayed below is for Civil Engineering. Please update entcConstants.js with actual ENTC data. */}
         </p>
         <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-400"></div>
       </div>
@@ -108,44 +93,62 @@ const EntcProgrammesPage = () => {
         {/* UG/PG Course Table */}
         {renderTable(
           ['Sr. No.', 'Course Name', 'Start Year', 'Duration (Years)', 'Type', 'Intake Capacity'],
-          entcCourses,
+          entcProgrammesCourses,
           'entc-course'
         )}
 
-        <div className="my-8"></div>
-
-        {/* Departmental Committee Section (Placeholder for ENTC) */}
-        <div className="bg-gradient-to-r from-indigo-50 to-blue-50 border-l-4 border-indigo-500 rounded-xl p-5 md:p-6 mb-8 transition-all duration-300 hover:shadow-md">
-          <h2 className="flex items-center justify-between text-2xl font-bold text-indigo-800 p-0 mb-0">
-            <span>Departmental Committee</span>
+        {/* Course Outcomes Links */}
+        <div className="my-8 pt-4 border-t border-gray-200">
+          <h2 className="text-2xl font-bold text-indigo-800 mb-6 flex items-center">
+            <svg className="w-6 h-6 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            Course Outcomes
           </h2>
-          <div className="mt-6 pt-6 border-t border-indigo-200 text-gray-700 leading-relaxed text-base md:text-lg">
-            <div className="bg-white p-4 rounded-lg shadow-sm mt-4">
-              <h3 className="text-xl md:text-2xl font-semibold text-center text-blue-700 mb-4">Program Assessment Committee</h3>
-              <p className="mb-4 text-center italic text-gray-500">
-                Program Assessment Committee (PAC) details are not available in the provided source data for Electronics & Telecommunication Engineering.
-              </p>
-            </div>
-
-            <div className="bg-white p-4 rounded-lg shadow-sm mt-6">
-              <h3 className="text-xl md:text-2xl font-semibold text-blue-700 mb-3 mt-6 text-center">
-                Department Advisory Board
-              </h3>
-              <p className="mb-4 text-center italic text-gray-500">
-                Department Advisory Board (DAB) details are not available in the provided source data for Electronics & Telecommunication Engineering.
-              </p>
-            </div>
-          </div>
+          {entcCourseOutcomesLinks.length > 0 ? (
+            <ul className="list-disc list-inside text-gray-700 space-y-2 pl-4">
+              {entcCourseOutcomesLinks.map((link, index) => (
+                <li key={index}>
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-blue-700 hover:text-blue-900 hover:underline transition-colors flex items-center"
+                  >
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0l-10 10"></path></svg>
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-700 italic text-center">No course outcomes links available.</p>
+          )}
         </div>
 
-        {/* Course Outcomes Links (Placeholder for ENTC) */}
-        <div className="mt-12 pt-8 border-t border-gray-200">
-          <h3 className="text-2xl font-bold text-indigo-800 mb-6">Course Outcomes</h3>
-          <div className="bg-blue-50 p-6 rounded-xl border border-blue-200 shadow-sm">
-            <p className="text-gray-700 mb-4 text-center italic text-gray-500">
-              Specific Course Outcomes links are not available in the provided source data for Electronics & Telecommunication Engineering.
-            </p>
-          </div>
+        {/* Departmental Committee Links */}
+        <div className="my-8 pt-4 border-t border-gray-200">
+          <h2 className="text-2xl font-bold text-indigo-800 mb-6 flex items-center">
+            <svg className="w-6 h-6 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-1a1.99 1.99 0 00-1.8-2H18a2 2 0 01-2-2V7a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 01-2 2H2v1a1.99 1.99 0 00-1.8 2H22"></path></svg>
+            Departmental Committee
+          </h2>
+          {entcProgrammesCommitteeLinks.length > 0 ? (
+            <ul className="list-disc list-inside text-gray-700 space-y-2 pl-4">
+              {entcProgrammesCommitteeLinks.map((link, index) => (
+                <li key={index}>
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-blue-700 hover:text-blue-900 hover:underline transition-colors flex items-center"
+                  >
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0l-10 10"></path></svg>
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-700 italic text-center">No departmental committee links available.</p>
+          )}
         </div>
       </div>
     </div>

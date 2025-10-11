@@ -1,22 +1,14 @@
-// EntcVisionMissionPage.jsx
+// src/pages/Academic/Entc/EntcVisionMissionPage.jsx
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
-// Define the sub-navigation tabs for the ENTC department
-const entcDepartmentTabs = [
-  { name: "DEPT Profile", path: "/academics/electronincs-telecommunication-engineering" },
-  { name: "Vision-Mission", path: "/academics/electronincs-telecommunication-engineering/vision-mission" },
-  { name: "Programmes", path: "/academics/electronincs-telecommunication-engineering/programmes" },
-  { name: "Faculty Profile", path: "/academics/electronincs-telecommunication-engineering/faculty" },
-  { name: "Laboratory", path: "/academics/electronincs-telecommunication-engineering/labs" },
-  { name: "Training and Placement", path: "/academics/electronincs-telecommunication-engineering/training-placement" },
-  { name: "Research & Publication", path: "/academics/electronincs-telecommunication-engineering/research-publication" },
-  { name: "Achievements", path: "/academics/electronincs-telecommunication-engineering/achievements" },
-  { name: "Departmental Activity", path: "/academics/electronincs-telecommunication-engineering/activities" },
-  { name: "ETA", path: "/academics/electronincs-telecommunication-engineering/eta" },
-  { name: "Downloads", path: "/academics/electronincs-telecommunication-engineering/downloads" },
-  { name: "Consultancy", path: "/academics/electronincs-telecommunication-engineering/consultancy" },
-];
+import {
+  entcDepartmentTabs,
+  entcVision,
+  entcMission,
+  entcPEOs,
+  entcPSOs,
+  entcPOs,
+} from './entcConstants'; // Import data from constants
 
 const EntcVisionMissionPage = () => {
   const location = useLocation();
@@ -85,7 +77,7 @@ const EntcVisionMissionPage = () => {
               <h3 className="text-2xl font-bold text-purple-700 print:text-xl">Vision</h3>
             </div>
             <p className="text-gray-700 text-center leading-relaxed print:text-sm">
-              To be one of the leading departments for Electronics and Telecommunication Engineering to develop proficient Electronics Engineers with global acceptance in the service of mankind.
+              {entcVision}
             </p>
           </div>
 
@@ -100,18 +92,11 @@ const EntcVisionMissionPage = () => {
               <h3 className="text-2xl font-bold text-purple-700 print:text-xl">Mission</h3>
             </div>
             <ol className="list-decimal list-inside text-gray-700 leading-relaxed space-y-3 pl-4 print:text-sm print:space-y-2">
-              <li className="pl-2">
-                <strong>M1:</strong> Promoting academic excellence in Electronics and Telecommunication engineers through experiential learning and industry engagement, focusing on Communication Engineering, VLSI, Embedded Systems and IoT for global competitiveness.
-              </li>
-              <li className="pl-2">
-                <strong>M2:</strong> Inculcating professionalism, innovation, teamwork, and ethical values in 5G Technology, Artificial Intelligence & Machine Learning, Green and Sustainable Technology, and Biomedical Electronics for the benefit of Society and Industry.
-              </li>
-              <li className="pl-2">
-                <strong>M3:</strong> Elevating student employability through hands-on programming education and cultivating a robust collaborative network with industry, academic experts, alumni, and student projects.
-              </li>
-              <li className="pl-2">
-                <strong>M4:</strong> Empowering faculty with continuous training in AIML, Medical Image Processing, Signal Processing, and Pedagogy to improve student learning and research productivity.
-              </li>
+              {entcMission.map((item, index) => (
+                <li key={index} className="pl-2">
+                  <strong>M{index + 1}:</strong> {item}
+                </li>
+              ))}
             </ol>
           </div>
         </div>
@@ -130,15 +115,11 @@ const EntcVisionMissionPage = () => {
             Graduates will be able to:
           </p>
           <ol className="list-decimal list-inside text-gray-700 leading-relaxed space-y-3 pl-4 print:text-sm print:space-y-2">
-            <li className="pl-2">
-              <strong>PSO1: </strong>Employ modern tools to model, simulate, experiment with, and analyze the performance of Electronics and Telecommunication systems.
-            </li>
-            <li className="pl-2">
-              <strong>PSO2:</strong> Address economic, social, environmental, ethical, health and safety issues keeping in pace with latest technological concepts.
-            </li>
-            <li className="pl-2">
-              <strong>PSO3: </strong>Drive need-based innovations in Electronics and Telecommunication Engineering, fostering "Make in India" through an understanding of finance management and entrepreneurship product development.
-            </li>
+            {entcPSOs.map((item, index) => (
+              <li key={index} className="pl-2">
+                <strong>PSO{index + 1}: </strong>{item}
+              </li>
+            ))}
           </ol>
         </div>
 
@@ -156,18 +137,11 @@ const EntcVisionMissionPage = () => {
             Graduates of Electronics and Telecommunication employed will:
           </p>
           <ol className="list-decimal list-inside text-gray-700 leading-relaxed space-y-3 pl-4 print:text-sm print:space-y-2">
-            <li className="pl-2">
-              <strong>PEO 1:</strong> Examine semiconductor device physics and enhance skills in advanced modeling and simulation using computational methods.
-            </li>
-            <li className="pl-2">
-              <strong>PEO 2:</strong> Master signal and Image processing principles as a core skill and specialize in designing embedded and VLSI systems.
-            </li>
-            <li className="pl-2">
-              <strong>PEO 3:</strong> Keep up with cutting-edge research in Signal and Image Processing, Communication systems and IoT.
-            </li>
-            <li className="pl-2">
-              <strong>PEO 4:</strong> Foster an academic environment that emphasizes excellence, leadership, and ethical standards in students, equipping them with lifelong learning skills and essential research components for a successful professional career.
-            </li>
+            {entcPEOs.map((item, index) => (
+              <li key={index} className="pl-2">
+                <strong>PEO {index + 1}:</strong> {item}
+              </li>
+            ))}
           </ol>
         </div>
 
@@ -182,20 +156,7 @@ const EntcVisionMissionPage = () => {
             <h3 className="text-2xl font-bold text-purple-700 print:text-xl">Program Outcomes [PO]</h3>
           </div>
           <ol className="list-decimal list-inside text-gray-700 space-y-4 pl-4 print:text-sm print:space-y-2">
-            {[
-              "Engineering Knowledge: Apply the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems.",
-              "Problem Analysis: Identify, formulate, research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of mathematics, natural sciences, and engineering sciences.",
-              "Design/development of Solutions: Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration for the public health and safety, and the cultural, societal, and environmental considerations.",
-              "Conduct Investigations of Complex Problems: Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of the information to provide valid conclusions.",
-              "Modern Tool usage: Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools including prediction and modelling to complex engineering activities with an understanding of the limitations.",
-              "The Engineer and Society: Apply reasoning informed by the contextual knowledge to assess societal, health, safety, legal and cultural issues and the consequent responsibilities relevant to the professional engineering practice.",
-              "Environment and Sustainability: Understand the impact of the professional engineering solutions in societal and environmental contexts, and demonstrate the knowledge of, and need for sustainable development.",
-              "Ethics: Apply ethical principles and commit to professional ethics and responsibilities and norms of the engineering practice.",
-              "Individual and Team Work: Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings.",
-              "Communication: Communicate effectively on complex engineering activities with the engineering community and with society at large, such as, being able to comprehend and write effective reports and design documentation, make effective presentations, and give and receive clear instructions.",
-              "Project Management and Finance: Demonstrate knowledge and understanding of the engineering and management principles and apply these to one's own work, as a member and leader in a team, to manage projects and in multidisciplinary environments.",
-              "Life-long Learning: Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change."
-            ].map((item, index) => (
+            {entcPOs.map((item, index) => (
               <li key={index} className="pl-2 pb-2 border-b border-gray-200 last:border-b-0 print:border-b print:pb-1">
                 {item}
               </li>

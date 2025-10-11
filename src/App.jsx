@@ -12,6 +12,9 @@ import LoginPage from './pages/Admin/Login';
 import AdminLayout from './pages/Admin/AdminLayout';
 import ManageFaculty from './pages/Admin/ManageFaculty';
 
+import ManagePages from './pages/Admin/ManagePages';
+import EditPageContent from './pages/Admin/EditPagecontent';
+
 // Import main pages
 import HomePage from './pages/Home';
 import ContactPage from './pages/contact';
@@ -128,6 +131,13 @@ import CivilResearchPublicationPage from './pages/Academic/Civil/CivilResearchPu
 import EntcPage from './pages/Academic/ENTC/EntcPage';
 import EntcVisionMissionPage from './pages/Academic/ENTC/EntcVisionMissionPage';
 import EntcProgrammesPage from './pages/Academic/ENTC/EntcProgrammesPage';
+import EntcTrainingPlacementPage from './pages/Academic/ENTC/EntcTrainingPlacementPage';
+import EntcEtaPage from './pages/Academic/ENTC/EntcEtaPage';
+import EntcCurriculumPage from './pages/Academic/ENTC/EntcCurriculumPage';
+import EntcResearchPublicationPage from './pages/Academic/ENTC/EntcResearchPublicationPage';
+import FeeStructurePage from './pages/Admission/FeeStructurePage';
+import SwayamNPTELPage from './pages/SwayamNPTEL/SwayamNPTELPage';
+import MandatoryDisclosurePage from './pages/MandatoryDisclosure/MandatoryDisclosurePage';
 
 // ==========================================================
 // Helper Placeholder Pages
@@ -240,7 +250,7 @@ const App = () => {
 
 
           <Route path="/academics/computer-science-engineering/csi-iei" element={<CSIIEIPage />} />
-          <Route path="/academics/computer-science-engineering/research-publication" element={<CSEResearchPublicationPage/>} />
+          <Route path="/academics/computer-science-engineering/research-publication" element={<CSEResearchPublicationPage />} />
           <Route path="/academics/civil-engineering" element={<CivilEngineeringPage />} />
           <Route path="/academics/civil-engineering/vision-mission" element={<CivilVisionMissionPage />} />
           <Route path="/academics/civil-engineering/programmes" element={<CivilProgrammesPage />} />
@@ -258,6 +268,10 @@ const App = () => {
           <Route path="/academics/electronincs-telecommunication-engineering" element={<EntcPage />} />
           <Route path="/academics/electronincs-telecommunication-engineering/vision-mission" element={<EntcVisionMissionPage />} />
           <Route path="/academics/electronincs-telecommunication-engineering/programmes" element={<EntcProgrammesPage />} />
+          <Route path="/academics/electronincs-telecommunication-engineering/training-placement" element={<EntcTrainingPlacementPage />} />
+          <Route path="/academics/electronincs-telecommunication-engineering/eta" element={<EntcEtaPage />} />
+          <Route path="/academics/electronincs-telecommunication-engineering/curriculum" element={<EntcCurriculumPage />} />
+          <Route path="/academics/electronincs-telecommunication-engineering/research-publication" element={<EntcResearchPublicationPage />} />
           <Route path="/academics/*" element={<PlaceholderPage title="Academics Section" />} />
 
 
@@ -280,13 +294,19 @@ const App = () => {
           {/* Admission Routes */}
           <Route path="/admission/under-graduate" element={<UnderGraduatePage />} />
           <Route path="/admission/post-graduate" element={<PostGraduatePage />} />
-          <Route path="/admission/fee-structure" element={<PlaceholderPage title="Admission Section" />} />
+          <Route path="/admission/fee-structure" element={<FeeStructurePage />} />
           <Route path="/admission/undertaking" element={<UndertakingPage />} />
 
           {/* Other Top-level Routes */}
           <Route path="/research" element={<PlaceholderPage title="Central Research" />} />
           <Route path="/iqac" element={<IQACPage />} />
           <Route path="/nba" element={<NBACertificatePage />} />
+
+          {/* Second Line */}
+          <Route path="/swayam-nptel" element={<SwayamNPTELPage />} />
+          <Route path="/mandatory-disclosure" element={<MandatoryDisclosurePage />} />
+          <Route path="/auditory-statement" element={<AuditedStatementsPage />} />
+
 
           {/* --- ADMIN ROUTES --- */}
           <Route path="/admin/login" element={<LoginPage />} />
@@ -295,6 +315,8 @@ const App = () => {
               <Route path="/admin/dashboard" element={<p>Welcome to the Admin Dashboard!</p>} />
               <Route path="/admin/events" element={<ManageEvents />} />
               <Route path="/admin/faculty" element={<ManageFaculty />} />
+              <Route path="/admin/pages" element={<ManagePages />} />
+              <Route path="/admin/pages/edit/:pageIdentifier" element={<EditPageContent />} />
             </Route>
           </Route>
 
