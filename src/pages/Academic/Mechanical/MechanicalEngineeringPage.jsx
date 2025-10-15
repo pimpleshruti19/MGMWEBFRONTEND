@@ -1,7 +1,9 @@
 // src/pages/Academic/Mechanical/MechanicalEngineeringPage.jsx
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { mechanicalDepartmentTabs, mechanicalDepartmentDetails } from './mechanicalConstants'; // Import shared constants
+import { mechanicalDepartmentTabs, mechanicalDepartmentDetails } from './mechanicalConstants';
+
+console.log('Are the constants imported?', { mechanicalDepartmentTabs, mechanicalDepartmentDetails });
 
 const MechanicalEngineeringPage = () => {
   const location = useLocation();
